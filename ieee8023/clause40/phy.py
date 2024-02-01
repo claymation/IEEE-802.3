@@ -1,15 +1,14 @@
 from .gmii import GMII
 from .mdi import MDI
 from .pcs.transmit import PCSTransmit
-from .pma import PMA
+from .pma.service_interface import PMA_UNITDATA
 
 
 class PHY:
     def __init__(self):
         self.gmii = GMII()
         self.mdi = MDI()
-        self.pma = PMA(self.mdi)
-        self.pcs_transmit = PCSTransmit(self.gmii, self.pma)
+        self.pcs_transmit = PCSTransmit(self)
 
     def connect(self, link_partner):
         self.mdi.connect(link_partner)
