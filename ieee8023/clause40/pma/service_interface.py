@@ -29,15 +29,13 @@ class PMA_UNITDATA(ServiceInterface):
         """
         §40.2.5 PMA_UNITDATA.request
         """
-        self.phy.mdi.output(tx_symb_vector)
+        self.phy.pma.transmit(tx_symb_vector)
 
-    def indication(self):
+    def indication(self, rx_symb_vector):
         """
         §40.2.6 PMA_UNITDATA.indication
         """
-        rx_symb_vector = self.mdi.sample()
-        return rx_symb_vector
-
+        pass
 
 class PMA_SCRSTATUS(ServiceInterface):
     def request(self, scr_status):

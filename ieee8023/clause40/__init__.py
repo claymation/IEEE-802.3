@@ -1,4 +1,1 @@
-from .phy import (
-    connect,
-    PHY,
-)
+from .phy import PHY

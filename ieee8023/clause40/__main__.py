@@ -1,17 +1,21 @@
 import argparse
+import sys
 
-from . import PHY, connect
+from . import PHY
 
 
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="1000BASE-T PHY model")
 
-parser.add_argument("TXD", type=bytes.fromhex, help="Transmit data (hex string)")
+parser.add_argument("TXD", type=bytes.fromhex, nargs="?", help="Transmit data (hex string)")
+parser.add_argument("--master", action="store_true", help="Master PHY")
+parser.add_argument("--mdi-x", action="store_true", help="MDI-X (DCE)")
 
 args = parser.parse_args()
 
-p = PHY()
-q = PHY()
+phy = PHY(TXD=args.TXD, master=args.master, mdi_x=args.mdi_x)
 
-connect(p, q)
+if args.master:
+    phy.transmit()
 
-p.transmit(args.TXD)
+while phy.receive() and phy.transmit():
+    pass
