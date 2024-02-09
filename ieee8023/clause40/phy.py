@@ -26,6 +26,10 @@ class PHY:
         self.mdi = MDI()
         self.pcs = PCS(self)
         self.pma = PMA(self)
+
+    def run(self):
+        while self.transmit() and self.receive():
+            pass
     
     def transmit(self):
         try:

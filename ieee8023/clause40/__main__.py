@@ -14,8 +14,4 @@ args = parser.parse_args()
 
 phy = PHY(TXD=args.TXD, master=args.master, mdi_x=args.mdi_x)
 
-if args.master:
-    phy.transmit()
-
-while phy.receive() and phy.transmit():
-    pass
+phy.run()
